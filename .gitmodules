@@ -1,0 +1,9 @@
+[submodule "nginx"]
+	path = nginx
+	url = git@github.com:dockas/dockas_nginx.git
+[submodule "webapp"]
+	path = webapp
+	url = git@github.com:dockas/dockas_webapp.git
+[submodule "api_rest"]
+	path = api_rest
+	url = git@github.com:dockas/dockas_api_rest.git
