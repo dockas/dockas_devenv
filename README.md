@@ -33,6 +33,16 @@ make logs srv=api_rest
 
 passing the container name (service) as the srv param.
 
+Last but not least: you must add this lines to your `/etc/hosts` file:
+
+```
+192.168.99.100 dockas.dev
+192.168.99.100 api.dockas.dev
+192.168.99.100 socket.dockas.dev
+```
+
+where 192.168.99.100 must be your docker dockas machine ip (which you can find running `docker-machine ip dockas-1`).
+
 **Warning**
 
 You must authorize the urls because we use self signed SSL certificates in development mode:

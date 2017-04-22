@@ -19,11 +19,11 @@ machine:
 	fi
 
 	$(eval ip := $(shell docker-machine ip dockas-1))
-	$(eval bip := $(shell docker-machine ssh dockas-1 ifconfig docker0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'))
+	$(eval bip := $(shell docker-machine ssh dockas-1 ifconfig docker0 | grep 'inet addr:' | awk '{print $$2}' | sed 's/addr://g'))
 
 	@if [ ! -f docker-compose.yml ]; then \
 		echo ">> generating docker-compose.yml file"; \
-		sed 's/192.168.99.100/'"$ip"'/g; s/172.17.0.1/'"$bip"'/g' docker-compose.yml.tpl > docker-compose.yml; \
+		sed 's/192.168.99.100/'"$(ip)"'/g; s/172.17.0.1/'"$(bip)"'/g' docker-compose.yml.tpl > docker-compose.yml; \
 	else \
 		echo ">> docker-compose.yml already exists"; \
 	fi
@@ -50,7 +50,11 @@ up: machine
 	sleep 10 && \
 	docker-compose up -d mongo redis && \
 	sleep 10 && \
-	docker-compose up -d api_rest nginx
+	docker-compose up -d api_rest && \
+	sleep 10 && \
+	docker-compose up -d webapp && \
+	sleep 10 && \
+	docker-compose up -d nginx
 
 update:
 	git submodule foreach git pull origin master

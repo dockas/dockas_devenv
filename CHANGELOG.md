@@ -1,2 +1,4 @@
 # Version 0.0.0
-INIT : Add submodules api_rest, nginx and webapp.
+INI : Add submodules api_rest, nginx and webapp.
+GIT : Checkout new commits for api_rest, nginx and webapp modules.
+BUG : Correct a bug with machine rule bid evaluation within Makefile.
