@@ -59,6 +59,8 @@ services:
         volumes:
             - ./api_rest/index.js:/home/index.js
             - ./api_rest/lib:/home/lib
+            - ./api_rest/files:/home/files
+            - ./api_rest/tmp:/home/tmp
             - ./api_rest/config:/home/config
             - ./api_rest/Makefile:/home/Makefile
             - ./api_rest/common-config:/home/common-config
