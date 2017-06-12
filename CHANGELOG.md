@@ -8,3 +8,4 @@ ENH : Ignore server.sh script.
 GIT : Checkout new commit for api_rest and webapp (add stage rules).
 ENH : Share api/files and api/tmp folders with api container.
 GIT : Checkout new commits for api_rest and webapp (new transparent checkout).
+GIT : Chekcout new commits for api_rest and webapp (create brand and products).
