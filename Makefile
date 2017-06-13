@@ -28,6 +28,9 @@ machine:
 		echo ">> docker-compose.yml already exists"; \
 	fi
 
+dirs:
+	mkdir -p api_rest/file api_rest/tmp
+
 ps:
 	@eval $$(docker-machine env dockas-1); \
 	docker ps
@@ -44,11 +47,11 @@ scale:
 	@eval $$(docker-machine env dockas-1); \
 	docker-compose scale $(srv)=$(num)
 
-up: machine
+up: machine dirs
 	@eval $$(docker-machine env dockas-1); \
 	docker-compose up -d consul registrator && \
 	sleep 10 && \
-	docker-compose up -d mongo redis && \
+	docker-compose up -d mongo redis arango && \
 	sleep 10 && \
 	docker-compose up -d api_rest && \
 	sleep 10 && \

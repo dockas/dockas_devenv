@@ -2,6 +2,7 @@ version: "2"
 
 volumes:
     mongo_vol:
+    arango_vol:
     letsencrypt_vol:
     webapp_vol:
 
@@ -51,6 +52,16 @@ services:
         ports:
             - "6379:6379"
 
+    # Arango
+    arango:
+        image: arangodb
+        ports:
+            - "8529:8529"
+        volumes:
+            - arango_vol:/var/lib/arangodb3
+        environment:
+            - ARANGO_NO_AUTH=1
+
     # API Rest
     api_rest:
         build: ./api_rest
@@ -83,6 +94,7 @@ services:
             - ./webapp/gulpfile.js:/home/webapp/gulpfile.js
             - ./webapp/gulp.config.js:/home/webapp/gulp.config.js
             - ./webapp/config:/home/webapp/config
+            - ./webapp/webpack:/home/webapp/webpack
             - ./webapp/darch:/home/webapp/darch
         depends_on:
             - api_rest
